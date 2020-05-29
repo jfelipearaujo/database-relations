@@ -6,19 +6,17 @@ import {
   JoinColumn,
   PrimaryGeneratedColumn,
   ManyToOne,
-  Unique,
 } from 'typeorm';
 
 import Order from '@modules/orders/infra/typeorm/entities/Order';
 import Product from '@modules/products/infra/typeorm/entities/Product';
 
 @Entity('orders_products')
-@Unique('uq_order_product', ['order_id', 'product_id'])
 class OrdersProducts {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @ManyToOne(() => Order, order => order.order_products)
+  @ManyToOne(() => Order)
   @JoinColumn({ name: 'order_id' })
   order: Order;
 
